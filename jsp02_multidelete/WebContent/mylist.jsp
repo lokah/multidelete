@@ -16,8 +16,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js">
+
+</script>
 
 <script>
+$(function(){
+
+$("#muldelform").submit(function(){
+
+if($("#muldelform input:checked").length ==0){
+
+alert("하나 이상 체크해 주세요");
+return false;
+}
+});
+});
 
 function wirteForm(){
 	location.href="boardwriteform.jsp";
@@ -61,7 +75,7 @@ text-decoration: none;
 
 	<h1>List</h1>
 
-<form action="./muldel.jsp" method="post">
+<form action="./muldel.jsp" method="post" id="muldelform">
 
 <table border="1">
 
