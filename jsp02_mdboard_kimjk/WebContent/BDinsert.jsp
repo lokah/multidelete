@@ -1,3 +1,6 @@
+<%@page import="com.md.dto.MDDto"%>
+<%@page import="com.md.dao.MDDao"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8");%>
@@ -11,41 +14,29 @@
 <body>
 
 <h1>글쓰기</h1>
-<form action="myinsertres.jsp" method="post">
-<table border="1">
+<form action="BDinsertres.jsp" method="post">
+<table>
 
 <tr>
-
 <th>이름</th>
 <td><input type="text" name="writer"></td>
-
 </tr>
 
 <tr>
 <th>제목</th>
 <td><input type="text" name="title"></td>
-
 </tr>
 
 <tr>
 <th>내용</th>
-<td><textarea rows="6" cols="60" name="content"></textarea>
-</td>
+<td><input type="text" name="content"></td>
+
 </tr>
 
 
 
-<tr>
-
-<td colspan="2">
-<input type="submit" value ='작성'>
-<input type="button" onclick="location.href='mylist.jsp'" value='취소'>
-</td>
-</tr>
 </table>
-
 </form>
-
 
 </body>
 </html>

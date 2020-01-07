@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<footer>kh정보교육원 &copy; all rights reserved...</footer>
+
+<h1>BDdetail</h1>
+
 </body>
 </html>
