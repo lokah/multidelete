@@ -32,7 +32,7 @@ public class MVCBizimpl implements MVCBiz {
 	@Override
 	public int update(MVCDto dto) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.update(dto);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class MVCBizimpl implements MVCBiz {
 	@Override
 	public boolean multiDelete(String[] seqs) {
 		// TODO Auto-generated method stub
-		return false;
+		return dao.multiDelete(seqs);
 	}
 
 }

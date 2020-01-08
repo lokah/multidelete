@@ -73,7 +73,52 @@ if(command.equals("list")){
 		
 	}
 	
+}else if(command.equals("muldel")){
+	
+	//1.
+	
+	String[] seqs = request.getParameterValues("chk");
+	
+	//2.
+	boolean res = biz.multiDelete(seqs);
+	
+	//3.
+	if(res){
+	
+		%>
+		
+		<script>
+		alert("선택된 글들을 모두 삭제 완성");
+		location.href="controller.jsp?command=list";
+		
+		</script>
+		<%
+	}else{
+		
+		%>
+		<script>
+		alert("선택된 글들을 삭제 실패했다");
+		location.href="controller.jsp?command=list";
+		
+		</script>
+		<%
 }
+	
+	
+	
+}else if(command.equals("boarddetail")){
+	//int seq = Integer.parseInt(request.getParameter("seq"));
+	int seq = Integer.parseInt(request.getParameter("seq"));
+	response.sendRedirect("boarddetail.jsp?seq=dto.getSeq()");
+
+	
+}
+//서버에 요청할 때 리퀘스트 객체에 담아 보낸다.
+//a-b-c ...b가 c로 넘겨주면서 추가로 데이터를 넣어 보낸다.(attribute)
+//mvc리스트가 콘트롤러에 요청
+//sendredirect 는 서버 밖에서 데이터의 교환이 이루어진다.
+//포워드는 서버가 모른다.
+//sendredirect는 서버가 안다.
 
 %>
 
