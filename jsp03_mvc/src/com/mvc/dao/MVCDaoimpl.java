@@ -58,6 +58,8 @@ public class MVCDaoimpl implements MVCDao {
 		// TODO Auto-generated method stub
 
 		Connection con = getConnection();
+		//PrepraredStatement pstm = null;
+		
 		Statement stmt = null;
 		ResultSet rs = null;
 		
@@ -65,7 +67,10 @@ public class MVCDaoimpl implements MVCDao {
 		MVCDto dto = null;
 
 		try {
+			//pstm =con.prepareStatement()
 			stmt = con.createStatement();
+			//pstm.setInt(1,seq);
+			//rs.pstm.executequery();
 			rs = stmt.executeQuery(SELECT_ONE_SQL+seq);
 			while (rs.next()) {
 
@@ -143,6 +148,10 @@ public class MVCDaoimpl implements MVCDao {
 
 			
 			res = pstm.executeUpdate();
+			if(res>0) {
+				
+				commit(con);
+			}
 
  
 
@@ -169,7 +178,51 @@ public class MVCDaoimpl implements MVCDao {
 	@Override
 	public int delete(int seq) {
 		// TODO Auto-generated method stub
-		return 0;
+		Connection con = getConnection();
+
+		
+
+		PreparedStatement pstm = null;
+
+		int res = 0;
+
+		
+
+		try {
+
+			pstm = con.prepareStatement(DELETE_SQL);
+
+			pstm.setInt(1, seq);
+
+			res = pstm.executeUpdate();
+			if(res>0) {
+				
+				commit(con);
+			}
+
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+
+			e.printStackTrace();
+
+		}finally {
+
+			
+
+				close(pstm);
+
+				close(con);
+
+			
+
+			
+
+		}
+
+		
+
+		return res;
 	}
 
 	@Override

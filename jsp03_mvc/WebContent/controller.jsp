@@ -106,13 +106,95 @@ if(command.equals("list")){
 	
 	
 	
-}else if(command.equals("boarddetail")){
+}else if(command.equals("detail")){
 	//int seq = Integer.parseInt(request.getParameter("seq"));
 	int seq = Integer.parseInt(request.getParameter("seq"));
-	response.sendRedirect("boarddetail.jsp?seq=dto.getSeq()");
+	MVCDto dto = biz.selectOne(seq);
+	request.setAttribute("dto",dto);
+	pageContext.forward("boarddetail.jsp");
+	//response.sendRedirect("boarddetail.jsp?seq=dto.getSeq()");
+	
+	
 
 	
+}else if(command.equals("delete")){
+	
+	int seq = Integer.parseInt(request.getParameter("seq"));
+	MVCDto dto = new MVCDto();
+	int res = biz.delete(seq);
+	if(res>0){
+		%>
+		<script>
+		
+		alert("글 삭제 성공")
+		location.href =  "controller.jsp?command=list";
+		</script>
+		<%
+		
+		
+	
+	}else{
+		
+		%>
+		
+		<script>
+		
+		alert("글 삭제 실패")
+		location.href = "controller.jsp?command=detaill&seq=<%=dto.getSeq()%>";
+		</script>
+		
+		<%	
+		}
+	
+}else if(command.equals("updateform")){
+			
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			
+			MVCDto dto = biz.selectOne(seq);
+			request.setAttribute("dto", dto);
+			pageContext.forward("boarddetail.jsp");
+		
+		
+		
+	}else if(command.equals("updateres")){
+		
+		String title = request.getParameter("title");
+		String content= request.getParameter("content");
+		int seq= Integer.parseInt(request.getParameter("seq"));
+		MVCDto dto = new MVCDto();
+		dto.setTitle(title);
+		dto.setContent(content);
+		dto.setSeq(seq);
+		
+		int res = biz.update(dto);
+		
+		if(res>0){
+			%>
+		
+	<script>
+		
+		alert("글 수정 성공")
+		location.href = "controller.jsp?command=detaill&seq=<%=dto.getSeq()%>";
+		</script>
+		
+	<%
+		
+	}else {
+		%>
+		
+	<script>
+		
+		alert("글 삭제 실패")
+		location.href = "controller.jsp?comand=updateform&seq=<%=dto.getSeq()%>";
+	</script>
+		
+<%
+	}
 }
+
+%>
+
+
 //서버에 요청할 때 리퀘스트 객체에 담아 보낸다.
 //a-b-c ...b가 c로 넘겨주면서 추가로 데이터를 넣어 보낸다.(attribute)
 //mvc리스트가 콘트롤러에 요청
@@ -120,7 +202,7 @@ if(command.equals("list")){
 //포워드는 서버가 모른다.
 //sendredirect는 서버가 안다.
 
-%>
+
 
 <h1>잘못왔다.(이게 보이면 command 확인)</h1>
 

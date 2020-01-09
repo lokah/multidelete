@@ -38,7 +38,7 @@ public class MVCBizimpl implements MVCBiz {
 	@Override
 	public int delete(int seq) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.delete(seq);
 	}
 
 	@Override

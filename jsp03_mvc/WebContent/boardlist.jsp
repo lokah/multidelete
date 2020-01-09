@@ -69,7 +69,7 @@ List<MVCDto> list = (List<MVCDto>)request.getAttribute("list");
 <td><input type="checkbox" name="chk" value="<%=dto.getSeq()%>"> </td>
 <td><%=dto.getSeq()%></td>
 <td><%=dto.getWriter()%></td>
-<td><a href="controller.jsp?command=boarddetail"><%=dto.getTitle()%></a></td>
+<td><a href="controller.jsp?command=detail&seq=<%=dto.getSeq()%>"><%=dto.getTitle()%></a></td>
 <td><%=dto.getRegdate()%></td>
 </tr>
 

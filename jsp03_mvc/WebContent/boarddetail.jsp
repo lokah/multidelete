@@ -18,15 +18,19 @@
 <body>
 
 <%
-int seq = Integer.parseInt(request.getParameter("seq"));
-MVCDao dao = new MVCDaoimpl();
-MVCDto dto = dao.selectOne(seq);
+
+
+
+//int seq = Integer.parseInt(request.getParameter("seq"));
+//MVCDao dao = new MVCDaoimpl();
+MVCDto dto = (MVCDto) request.getAttribute("dto");
+//dao.selectOne(seq);
 %>
 
 <h1>Detail</h1>
 <table border="1">
 <tr>
-<th>이름</th>
+<th>작성자</th>
 <td><%=dto.getWriter() %></td>
 </tr>
 <tr>
@@ -41,9 +45,10 @@ MVCDto dto = dao.selectOne(seq);
 
 <tr>
 <td colspan="2" align="right">
-<input type="button" value='수정' onclick="location.href='myupdate.jsp?myno=<%=dto.getSeq()%>'"> 
-<input type="button" value='삭제' onclick="location.href='mydelete.jsp?myno=<%=dto.getSeq()%>'"> <!-- 쿼리 스트링 -->
-<input type="button" value='목록' onclick="location.href='boardlist.jsp'">
+<input type="button" value='수정' onclick="location.href='controller.jsp?command=updateform&seq=<%=dto.getSeq()%>'"> 
+<input type="button" value='삭제' onclick="location.href='controller.jsp?command=delete&seq=<%=dto.getSeq()%>'">
+ <!-- 쿼리 스트링 -->
+<input type="button" value='목록' onclick="location.href='controller.jsp?command=list'">
 </td>
 </tr>
 </table>
