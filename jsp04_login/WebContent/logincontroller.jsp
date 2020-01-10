@@ -41,7 +41,7 @@
 				
 				response.sendRedirect("adminmain.jsp");
 			}else if(dto.getMyrole().equals("USER")){
-				
+				System.out.println("로그인했니");
 				response.sendRedirect("usermain.jsp");
 			}
 		}else {
@@ -50,7 +50,7 @@
 			
 			<script>
 			
-			alert("id와 pw를 다시 한번 확인해 주세요")
+			alert("id와 pw를 다시 한번 확인해 주세요");
 			location.href="index.jsp";
 			
 			</script>
@@ -106,6 +106,61 @@
 			
 			alert("등급 조정 실패");
 			location.href = "logincontroller.jsp?command=updateroleform&myno=<%=myno%>";
+			
+			</script>
+			<% 
+		}
+	}else if(command.equals("registform")){
+		
+		response.sendRedirect("registform.jsp");
+	}else if(command.equals("idchk")){
+		
+		String myid = request.getParameter("id");
+		
+		MyDto dto = biz.idChk(myid);
+		
+		boolean idnotused = true;
+		if(dto != null){
+			idnotused = false;
+		}
+		
+		response.sendRedirect("idchk.jsp?idnotused="+idnotused);
+	}else if(command.equals("registres")){
+		
+		String myid = request.getParameter("myid");
+		String mypw = request.getParameter("mypw");
+		String myname = request.getParameter("myname");
+		String myaddr = request.getParameter("myaddr");
+		String myphone = request.getParameter("myphone");
+		String myemail = request.getParameter("myemail");
+		MyDto dto = new MyDto(); 
+				dto.setMyid(myid);
+				dto.setMypw(mypw);
+				dto.setMyname(myname);
+				dto.setMyaddr(myaddr);
+				dto.setMyphone(myphone);
+				dto.setMyemail(myemail);
+				
+		int res = biz.insertUser(dto);
+		if(res>0){
+			
+			%>
+			<script type="text/javascript">
+			
+			alert("회원 가입 성공");
+			location.href= "logincontroller.jsp?command=login";
+			
+			</script>
+			<%
+			
+			
+		}else {
+			
+			%>
+			<script type="text/javascript">
+			
+			alert("회원 가입 실패");
+			location.href= "logincontroller.jsp?command=registform";
 			
 			</script>
 			<% 

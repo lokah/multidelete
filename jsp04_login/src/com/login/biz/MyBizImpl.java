@@ -38,13 +38,13 @@ public class MyBizImpl implements MyBiz {
 	@Override
 	public MyDto idChk(String myid) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.idChk(myid);
 	}
 
 	@Override
 	public int insertUser(MyDto dto) {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.insertUser(dto);
 	}
 
 	@Override

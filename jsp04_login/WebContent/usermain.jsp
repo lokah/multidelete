@@ -24,5 +24,6 @@ MyDto dto = (MyDto)session.getAttribute("dto");
 <h1><%=dto.getMyname() %>님 환영합니다.</h1>
 
 
+
 </body>
 </html>

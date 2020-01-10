@@ -9,12 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.login.dto.MyDto;
-
-
 import static com.login.db.JDBCTemplate.*;
-
-
-
 
 public class MyDaoImpl implements MyDao {
 
@@ -165,13 +160,83 @@ public class MyDaoImpl implements MyDao {
 	@Override
 	public MyDto idChk(String myid) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		MyDto dto = null;
+		String sql = " SELECT * FROM MYMEMBER WHERE MYID = ? ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			
+			pstm.setString(1, myid);
+			
+			
+			rs = pstm.executeQuery();
+			while(rs.next()) {
+				dto = new MyDto();
+				dto.setMyno(rs.getInt(1));
+				dto.setMyid(rs.getString(2));
+				dto.setMypw(rs.getString(3));
+				dto.setMyname(rs.getString(4));
+				dto.setMyaddr(rs.getString(5));
+				dto.setMyphone(rs.getString(6));
+				dto.setMyemail(rs.getString(7));
+				dto.setMyenabled(rs.getString(8));
+				dto.setMyrole(rs.getString(9));
+				
+			}
+					
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+			close(con);
+		}
+		
+		
+		return dto;
 	}
 
 	@Override
 	public int insertUser(MyDto dto) {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		
+		int res = 0;
+		String sql = " INSERT INTO MYMEMBER " + " VALUES(MYMEMBERSEQ.NEXTVAL, ?, ?, ?,?,?,?, 'Y', 'USER') ";
+
+		try {
+
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, dto.getMyid());
+			pstm.setString(2, dto.getMypw());
+			pstm.setString(3, dto.getMyname());
+			pstm.setString(4, dto.getMyaddr());
+			pstm.setString(5, dto.getMyphone());
+			pstm.setString(6, dto.getMyemail());
+			
+
+			res = pstm.executeUpdate();
+			if (res > 0) {
+
+				commit(con);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+			close(con);
+		}
+
+		return res;
 	}
 
 	@Override
