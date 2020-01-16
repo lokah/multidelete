@@ -1,4 +1,4 @@
-<%@page import="com.mvc.dto.MVCDto"%>
+<%@page import="com.mvc.dto.MyDto"%>
 <%@page import="com.mvc.dao.MVCDao"%>
 <%@page import="com.mvc.dao.MVCDaoImpl"%>
 <%@page import="com.mvc.biz.MVCBiz"%>
@@ -7,8 +7,12 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% request.setCharacterEncoding("UTF-8");%>
-<% response.setContentType("text/html; charset=UTF-8");%>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
+<%
+	response.setContentType("text/html; charset=UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,9 +22,7 @@
 <body>
 
 <%
-
-MVCDto dto =(MVCDto) request.getAttribute("dto");
-
+	MyDto dto =(MyDto) request.getAttribute("dto");
 %>
 
 <h1>수정하기</h1>

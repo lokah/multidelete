@@ -1,4 +1,4 @@
-<%@page import="com.mvc.dto.MVCDto"%>
+<%@page import="com.mvc.dto.MyDto"%>
 <%@page import="com.mvc.dao.MVCDao"%>
 <%@page import="com.mvc.biz.MVCBiz"%>
 <%@page import="com.mvc.biz.MVCBizimpl"%>
@@ -6,8 +6,12 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% request.setCharacterEncoding("UTF-8");%>
-<% response.setContentType("text/html; charset=UTF-8");%>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
+<%
+	response.setContentType("text/html; charset=UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,10 +22,7 @@
 
 
 <%
-
-List<MVCDto> list = (List<MVCDto>)request.getAttribute("list");
-
-
+	List<MyDto> list = (List<MyDto>)request.getAttribute("list");
 %>
 
 
@@ -46,10 +47,7 @@ List<MVCDto> list = (List<MVCDto>)request.getAttribute("list");
 </tr>
 
 <%
-
 	if(list.size()==0){
-		
-		
 %>
 
 
@@ -59,9 +57,9 @@ List<MVCDto> list = (List<MVCDto>)request.getAttribute("list");
 </tr>
 
  <%
-	}else{
-		
-		for(MVCDto dto:list){
+ 	}else{
+ 		
+ 		for(MyDto dto:list){
  %>
 
 <tr>

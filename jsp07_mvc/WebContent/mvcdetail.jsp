@@ -1,4 +1,4 @@
-<%@page import="com.mvc.dto.MVCDto"%>
+<%@page import="com.mvc.dto.MyDto"%>
 <%@page import="com.mvc.dao.MVCDao"%>
 <%@page import="com.mvc.dao.MVCDaoImpl"%>
 <%@page import="com.mvc.biz.MVCBiz"%>
@@ -7,8 +7,12 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% request.setCharacterEncoding("UTF-8");%>
-<% response.setContentType("text/html; charset=UTF-8");%>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
+<%
+	response.setContentType("text/html; charset=UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,13 +22,10 @@
 <body>
 
 <%
-
-
-
-int seq = Integer.parseInt(request.getParameter("seq"));
+	int seq = Integer.parseInt(request.getParameter("seq"));
 MVCDao dao = new MVCDaoImpl();
 //MVCDto dto = (MVCDto) request.getAttribute("dto");
-MVCDto dto = dao.selectOne(seq);
+MyDto dto = dao.selectOne(seq);
 //dao.selectOne(seq);
 %>
 

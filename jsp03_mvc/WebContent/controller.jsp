@@ -1,4 +1,4 @@
-<%@page import="com.mvc.dto.MVCDto"%>
+<%@page import="com.mvc.dto.MyDto"%>
 <%@page import="com.mvc.dao.MVCDao"%>
 <%@page import="com.mvc.biz.MVCBiz"%>
 <%@page import="com.mvc.biz.MVCBizimpl"%>
@@ -6,8 +6,12 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% request.setCharacterEncoding("UTF-8");%>
-<% response.setContentType("text/html; charset=UTF-8");%>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
+<%
+	response.setContentType("text/html; charset=UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,8 +22,7 @@
 
 
 <%
-
-String command = request.getParameter("command");
+	String command = request.getParameter("command");
 System.out.println("<"+command+">");
 
 MVCBiz biz = new MVCBizimpl();
@@ -28,21 +31,21 @@ if(command.equals("list")){
 	//1.받을 데이터 없다.
 	//2.
 	
-	List<MVCDto> list = biz.selectList();
+	List<MyDto> list = biz.selectList();
 	request.setAttribute("list", list);
 	//3.
 	pageContext.forward("boardlist.jsp");
 }else if(command.equals("writeform")){
 	
 	//1.받을 데이터가 있는지? 없고
-			//2. db에서 가져올 데이터가 있는지? 없고
-					//3.어디로 갈런지?
+	//2. db에서 가져올 데이터가 있는지? 없고
+			//3.어디로 갈런지?
 		response.sendRedirect("boardwrite.jsp");
 }else if(command.equals("writeres")){
 	String writer = request.getParameter("writer");
 	String title = request.getParameter("title");
 	String content = request.getParameter("content");
-	MVCDto dto = new MVCDto();
+	MyDto dto = new MyDto();
 	
 	dto.setWriter(writer);
 	dto.setTitle(title);
@@ -52,14 +55,16 @@ if(command.equals("list")){
 	int res = biz.insert(dto);
 	//3. 어디로 갈건지
 	if(res>0){
-		%>
+%>
 		<script>
 		
 		alert("새로운 글을 등록 완료했다");
 		location.href="controller.jsp?command=list";
 		</script>
 		
-		<%}else{ %>
+		<%
+					}else{
+				%>
 		
 		<script>
 		
@@ -69,23 +74,20 @@ if(command.equals("list")){
 		
 		
 	<%
-	
-		
-	}
-	
-}else if(command.equals("muldel")){
-	
-	//1.
-	
-	String[] seqs = request.getParameterValues("chk");
-	
-	//2.
-	boolean res = biz.multiDelete(seqs);
-	
-	//3.
-	if(res){
-	
-		%>
+						}
+						
+					}else if(command.equals("muldel")){
+						
+						//1.
+						
+						String[] seqs = request.getParameterValues("chk");
+						
+						//2.
+						boolean res = biz.multiDelete(seqs);
+						
+						//3.
+						if(res){
+					%>
 		
 		<script>
 		alert("선택된 글들을 모두 삭제 완성");
@@ -93,8 +95,7 @@ if(command.equals("list")){
 		
 		</script>
 		<%
-	}else{
-		
+			}else{
 		%>
 		<script>
 		alert("선택된 글들을 삭제 실패했다");
@@ -102,27 +103,27 @@ if(command.equals("list")){
 		
 		</script>
 		<%
-}
-	
-	
-	
-}else if(command.equals("detail")){
-	//int seq = Integer.parseInt(request.getParameter("seq"));
-	int seq = Integer.parseInt(request.getParameter("seq"));
-	MVCDto dto = biz.selectOne(seq);
-	request.setAttribute("dto",dto);
-	pageContext.forward("boarddetail.jsp");
-	//response.sendRedirect("boarddetail.jsp?seq=dto.getSeq()");
-	
-	
+			}
+			
+			
+			
+		}else if(command.equals("detail")){
+			//int seq = Integer.parseInt(request.getParameter("seq"));
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			MyDto dto = biz.selectOne(seq);
+			request.setAttribute("dto",dto);
+			pageContext.forward("boarddetail.jsp");
+			//response.sendRedirect("boarddetail.jsp?seq=dto.getSeq()");
+			
+			
 
-	
-}else if(command.equals("delete")){
-	
-	int seq = Integer.parseInt(request.getParameter("seq"));
-	MVCDto dto = new MVCDto();
-	int res = biz.delete(seq);
-	if(res>0){
+			
+		}else if(command.equals("delete")){
+			
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			MyDto dto = new MyDto();
+			int res = biz.delete(seq);
+			if(res>0){
 		%>
 		<script>
 		
@@ -130,11 +131,7 @@ if(command.equals("list")){
 		location.href =  "controller.jsp?command=list";
 		</script>
 		<%
-		
-		
-	
-	}else{
-		
+			}else{
 		%>
 		
 		<script>
@@ -143,33 +140,33 @@ if(command.equals("list")){
 		location.href = "controller.jsp?command=detaill&seq=<%=dto.getSeq()%>";
 		</script>
 		
-		<%	
-		}
-	
-}else if(command.equals("updateform")){
-			
-			int seq = Integer.parseInt(request.getParameter("seq"));
-			
-			MVCDto dto = biz.selectOne(seq);
-			request.setAttribute("dto", dto);
-			pageContext.forward("boarddetail.jsp");
-		
-		
-		
-	}else if(command.equals("updateres")){
-		
-		String title = request.getParameter("title");
-		String content= request.getParameter("content");
-		int seq= Integer.parseInt(request.getParameter("seq"));
-		MVCDto dto = new MVCDto();
-		dto.setTitle(title);
-		dto.setContent(content);
-		dto.setSeq(seq);
-		
-		int res = biz.update(dto);
-		
-		if(res>0){
-			%>
+		<%
+					}
+					
+				}else if(command.equals("updateform")){
+					
+					int seq = Integer.parseInt(request.getParameter("seq"));
+					
+					MyDto dto = biz.selectOne(seq);
+					request.setAttribute("dto", dto);
+					pageContext.forward("boarddetail.jsp");
+						
+						
+						
+					}else if(command.equals("updateres")){
+						
+						String title = request.getParameter("title");
+						String content= request.getParameter("content");
+						int seq= Integer.parseInt(request.getParameter("seq"));
+						MyDto dto = new MyDto();
+						dto.setTitle(title);
+						dto.setContent(content);
+						dto.setSeq(seq);
+						
+						int res = biz.update(dto);
+						
+						if(res>0){
+				%>
 		
 	<script>
 		
