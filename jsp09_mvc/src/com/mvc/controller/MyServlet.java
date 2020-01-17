@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mvc.biz.MyBiz;
 import com.mvc.biz.MyBizImpl;
-
 import com.mvc.dto.MyDto;
 
 /**
@@ -94,7 +93,66 @@ public class MyServlet extends HttpServlet {
 			}
 			
 		}else if(command.equals("myupdate")) {
+			int seq = Integer.parseInt(request.getParameter("seq"));
 			
+			MyDto dto = biz.selectOne(seq);
+			request.setAttribute("dto", dto);
+			dispatch("myupdate.jsp", request, response);
+			
+		}else if(command.equals("myupdateres")) {
+			
+			String title = request.getParameter("title");
+			String content= request.getParameter("content");
+			int seq= Integer.parseInt(request.getParameter("seq"));
+			MyDto dto = new MyDto();
+			dto.setTitle(title);
+			dto.setContent(content);
+			dto.setSeq(seq);
+			
+			int res = biz.update(dto);
+			
+			if(res>0) {
+				//response.sendRedirect("mvc.do?command=list"); 이렇게 하면 정상적으로 작동한다.
+				//dispatch("mvc.do?command=list", request, response); 이 경우 새로고침 하면 글 목록이 계속 만들어진다.
+				
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('수정 완료했다');");
+				out.println("location.href='con.do?command=detail&seq="+dto.getSeq()+"';");
+				out.println("</script>");
+						
+				//jsResponse("글 수정 성공 ", "con.do?command=list", response);
+			}else {
+				//dispatch("mvc.do?command=writeform", request, response);
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('수정 실패했다');");
+				out.println("location.href='con.do?command=list';");
+				out.println("</script>");
+				//jsResponse("글 수정 실패 ", "con.do?command=writeform", response);
+			}
+			
+		}else if(command.equals("delete")) {
+			
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			MyDto dto = new MyDto();
+			int res = biz.delete(seq);
+			if(res>0){
+				/*
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('삭제 완료했다');");
+				out.println("location.href='mvc.do?command=list';");
+				out.println("</script>");
+				*/
+				jsResponse("글 삭제 성공 ", "con.do?command=list", response);
+				
+			}else {
+				
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('삭제 실패했다');");
+				out.println("location.href='con.do?command=detail';");
+				out.println("</script>");
+				
+				//jsResponse("글 삭제 실패 ", "mvc.do?command=detail", response);
+			}
 			
 		}
 		

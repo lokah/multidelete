@@ -1,4 +1,4 @@
-<%@page import="com.mvc.dto.MyDto"%>
+<%@page import="com.mvc.dto.MVCDto"%>
 <%@page import="com.mvc.dao.MVCDao"%>
 <%@page import="com.mvc.dao.MVCDaoImpl"%>
 <%@page import="com.mvc.biz.MVCBiz"%>
@@ -22,7 +22,7 @@
 <body>
 
 <%
-	MyDto dto =(MyDto) request.getAttribute("dto");
+	MVCDto dto =(MVCDto) request.getAttribute("dto");
 %>
 
 <h1>수정하기</h1>

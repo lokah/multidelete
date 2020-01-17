@@ -1,4 +1,4 @@
-<%@page import="com.mvc.dto.MyDto"%>
+<%@page import="com.mvc.dto.MVCDto"%>
 <%@page import="com.mvc.dao.MVCDao"%>
 <%@page import="com.mvc.dao.MVCDaoImpl"%>
 <%@page import="com.mvc.biz.MVCBiz"%>
@@ -25,7 +25,7 @@
 	int seq = Integer.parseInt(request.getParameter("seq"));
 MVCDao dao = new MVCDaoImpl();
 //MVCDto dto = (MVCDto) request.getAttribute("dto");
-MyDto dto = dao.selectOne(seq);
+MVCDto dto = dao.selectOne(seq);
 //dao.selectOne(seq);
 %>
 
