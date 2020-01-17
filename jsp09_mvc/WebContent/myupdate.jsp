@@ -43,7 +43,7 @@
 				<td colspan="2" align="right"><input type="submit" value='수정'>
 
 					<input type="button" value='취소' onclick=""> <input
-					type="button" value='목록' onclick="location.href='mvc.do?command=list';">
+					type="button" value='목록' onclick="location.href='con.do?command=list';">
 
 				</td>
 
