@@ -1,5 +1,5 @@
 
-<%@page import="com.mvc.dto.MyDto"%>
+<%@page import="com.mvc.dto.MVCDto"%>
 <%@page import="com.mvc.dao.MVCDao"%>
 <%@page import="com.mvc.biz.MVCBiz"%>
 <%@page import="com.mvc.biz.MVCBizimpl"%>
@@ -22,7 +22,7 @@
 
 
 <%
-	MyDto dto =(MyDto) request.getAttribute("dto");
+	MVCDto dto =(MVCDto) request.getAttribute("dto");
 %>
 
 

@@ -1,4 +1,4 @@
-<%@page import="com.mvc.dto.MyDto"%>
+<%@page import="com.mvc.dto.MVCDto"%>
 <%@page import="com.mvc.dao.MVCDao"%>
 <%@page import="com.mvc.biz.MVCBiz"%>
 <%@page import="com.mvc.biz.MVCBizimpl"%>
@@ -22,7 +22,7 @@
 
 
 <%
-	List<MyDto> list = (List<MyDto>)request.getAttribute("list");
+	List<MVCDto> list = (List<MVCDto>)request.getAttribute("list");
 %>
 
 
@@ -59,7 +59,7 @@
  <%
  	}else{
  		
- 		for(MyDto dto:list){
+ 		for(MVCDto dto:list){
  %>
 
 <tr>

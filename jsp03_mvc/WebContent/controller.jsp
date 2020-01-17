@@ -1,4 +1,4 @@
-<%@page import="com.mvc.dto.MyDto"%>
+<%@page import="com.mvc.dto.MVCDto"%>
 <%@page import="com.mvc.dao.MVCDao"%>
 <%@page import="com.mvc.biz.MVCBiz"%>
 <%@page import="com.mvc.biz.MVCBizimpl"%>
@@ -31,7 +31,7 @@ if(command.equals("list")){
 	//1.받을 데이터 없다.
 	//2.
 	
-	List<MyDto> list = biz.selectList();
+	List<MVCDto> list = biz.selectList();
 	request.setAttribute("list", list);
 	//3.
 	pageContext.forward("boardlist.jsp");
@@ -45,7 +45,7 @@ if(command.equals("list")){
 	String writer = request.getParameter("writer");
 	String title = request.getParameter("title");
 	String content = request.getParameter("content");
-	MyDto dto = new MyDto();
+	MVCDto dto = new MVCDto();
 	
 	dto.setWriter(writer);
 	dto.setTitle(title);
@@ -110,7 +110,7 @@ if(command.equals("list")){
 		}else if(command.equals("detail")){
 			//int seq = Integer.parseInt(request.getParameter("seq"));
 			int seq = Integer.parseInt(request.getParameter("seq"));
-			MyDto dto = biz.selectOne(seq);
+			MVCDto dto = biz.selectOne(seq);
 			request.setAttribute("dto",dto);
 			pageContext.forward("boarddetail.jsp");
 			//response.sendRedirect("boarddetail.jsp?seq=dto.getSeq()");
@@ -121,7 +121,7 @@ if(command.equals("list")){
 		}else if(command.equals("delete")){
 			
 			int seq = Integer.parseInt(request.getParameter("seq"));
-			MyDto dto = new MyDto();
+			MVCDto dto = new MVCDto();
 			int res = biz.delete(seq);
 			if(res>0){
 		%>
@@ -147,7 +147,7 @@ if(command.equals("list")){
 					
 					int seq = Integer.parseInt(request.getParameter("seq"));
 					
-					MyDto dto = biz.selectOne(seq);
+					MVCDto dto = biz.selectOne(seq);
 					request.setAttribute("dto", dto);
 					pageContext.forward("boarddetail.jsp");
 						
@@ -158,7 +158,7 @@ if(command.equals("list")){
 						String title = request.getParameter("title");
 						String content= request.getParameter("content");
 						int seq= Integer.parseInt(request.getParameter("seq"));
-						MyDto dto = new MyDto();
+						MVCDto dto = new MVCDto();
 						dto.setTitle(title);
 						dto.setContent(content);
 						dto.setSeq(seq);
