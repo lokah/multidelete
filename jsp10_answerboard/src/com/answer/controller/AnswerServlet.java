@@ -150,6 +150,27 @@ public class AnswerServlet extends HttpServlet {
 	
 	
 	
+	}else if(command.equals("rewriteres")) {
+		
+	int parentboardno = Integer.parseInt(request.getParameter("parentboardno"));
+	String writer = request.getParameter("writer");
+	String title = request.getParameter("title");
+	String content = request.getParameter("content");
+	AnswerDto dto = new AnswerDto();
+	dto.setBoardno(parentboardno);
+	dto.setWriter(writer);
+	dto.setTitle(title);
+	dto.setContent(content);
+	int res = biz.answerProc(dto);
+	if(res>0) {
+		
+		jsResponse("답변 작성 성공","answer.do?command=list",response);
+	}else {
+		jsResponse("답변 작성 실패","answer.do?command=answer&boardno="+parentboardno,response);
+	}
+	
+		
+		
 	}else if(command.equals("delete")) {
 		
 		int boardno = Integer.parseInt(request.getParameter("boardno"));

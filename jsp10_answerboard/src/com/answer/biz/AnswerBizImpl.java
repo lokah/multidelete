@@ -39,5 +39,21 @@ public class AnswerBizImpl implements AnswerBiz {
 		// TODO Auto-generated method stub
 		return dao.delete(boardno);
 	}
+	/*
+	public int answerUpdate(int parentboardno) {
+		
+		return dao.answerUpdate(parentboardno);
+	}
+	public int answerInsert(AnswerDto dto) {
+		
+		return dao.answerInsert(dto);
+	}
+*/
+	public int answerProc(AnswerDto dto) {
+		
+		int updateRes = dao.answerUpdate(dto.getBoardno());
+		int insertRes = dao.answerInsert(dto);
+		return updateRes + insertRes;
+	}
 
 }

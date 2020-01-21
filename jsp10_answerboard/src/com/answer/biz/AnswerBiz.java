@@ -15,5 +15,10 @@ public interface AnswerBiz {
 	public int update(AnswerDto dto);
 
 	public int delete(int boardno);
+	/*
+	public int answerUpdate(int parentboardno);
+	public int answerInsert(AnswerDto dto);
+	*/
+	public int answerProc(AnswerDto dto);
 	
 }

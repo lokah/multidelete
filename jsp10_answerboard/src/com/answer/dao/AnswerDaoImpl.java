@@ -219,5 +219,82 @@ public class AnswerDaoImpl implements AnswerDao {
 
 		return res;
 	}
+	
+	public int answerUpdate(int parentboardno) {
+		
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int res = 0;
+
+		try {
+
+			pstm = con.prepareStatement(ANSUPDATE_SQL);
+
+			pstm.setInt(1, parentboardno);
+
+			pstm.setInt(2, parentboardno);
+
+			
+
+			
+			res = pstm.executeUpdate();
+			if(res>0) {
+				
+				commit(con);
+			}
+
+ 
+
+		} catch (SQLException e) {
+
+			// TODO Auto-generated catch block
+
+			e.printStackTrace();
+
+		} finally {
+
+ 
+				close(pstm);
+
+				close(con);
+
+		}
+
+		return res;
+	}
+	
+	public int answerInsert(AnswerDto dto) {
+		
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int res = 0;
+
+		try {
+
+			pstm = con.prepareStatement(ANSINSERT_SQL);
+			pstm.setInt(1, dto.getBoardno());
+			pstm.setInt(2, dto.getBoardno());
+			pstm.setInt(3, dto.getBoardno());
+			pstm.setString(4, dto.getTitle());
+			pstm.setString(5, dto.getContent());
+			pstm.setString(6, dto.getWriter());
+			
+
+			res = pstm.executeUpdate();
+			if (res > 0) {
+
+				commit(con);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+			close(con);
+		}
+
+		return res;
+		
+	}
 
 }
