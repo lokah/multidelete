@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+function getParameterValues(){
+	
+	var name="name="+encodeURIComponent($('#name').val());
+	//URI로 데이터를 전달하기 위해서 문자열을 인코딩
+	var kor="kor="+$('#kor').val();
+	var eng="eng="+$('#eng').val();
+	var math="math="+$('#math').val();
+	var query=name+"&"+kor+"&"+eng+"&"+math;
+	
+	return query;
+	
+}
+//JSON(제이슨[1], JavaScript Object Notation)은 속성-값 쌍( attribute–value pairs and array data types (or any other serializable value)) 
+//또는 "키-값 쌍"으로 이루어진 데이터 오브젝트를 전달하기 위해 인간이 읽을 수 있는 텍스트를 사용하는 개방형 표준 포맷
+$(function(){
+	
+	$('#process').click(function(){
+		$.ajax({
+			url:"score.cal?"+getParameterValues(),
+					dataType:"json",//전송받는 데이터의 타입
+					success:function(msg){
+						$('#result').html(//encodeURIComponent로 이스케이핑 된 문자열을 정상적인 문자열로 되돌려주는 역활을 한다.
+								decodeURIComponent(msg.name)+"님의 총점은 "
+								+ msg.sum + "이고, 평균은 "
+								+ msg.avg +"입니다.");
+					},
+					error:function(){
+						alert("통신 실패");
+					}
+		});
+	});
+});
+
+
+
+
+</script>
+</head>
+<body>
+
+<h1>성적 처리 프로그램</h1>
+
+이름 : <input type="text" id="name"><br>
+국어 : <input type="text" id="kor"><br>
+영어 : <input type="text" id="eng"><br>
+수학 : <input type="text" id="math"><br>
+<input type="button" id="process" value="성적처리"><br>
+
+<div id="result"></div>
+
+
+</body>
+</html>
