@@ -30,7 +30,7 @@
 
 
 <h1>일정 작성</h1>
-<form action="calendar.do" method="post">
+<form action="calendar.do" method="get">
 <input type="hidden" name="command" value="insertcal">
 
 <table border="1">
@@ -63,7 +63,7 @@
 	
 	<%
 	
-	for(int i=1; i<12;i++){
+	for(int i=1; i<13;i++){
 		
 		%>
 		
@@ -75,7 +75,58 @@
 	%>
 	
 	
-	</select>
+	</select>월
+	<select name="date">
+	
+	<%
+	
+	for(int i=1; i<lastDay;i++){
+		
+		%>
+		
+		<option value="<%=i%>" <%=(date==i)?"selected":""%>><%=i %></option>
+		
+		<% 
+	}
+	
+	%>
+	
+	
+	</select>일
+	<select name="hour">
+	
+	<%
+	
+	for(int i=1; i<25;i++){
+		
+		%>
+		
+		<option value="<%=i%>" <%=(hour==i)?"selected":""%>><%=i %></option>
+		
+		<% 
+	}
+	
+	%>
+	
+	
+	</select>시
+	<select name="min">
+	
+	<%
+	
+	for(int i=1; i<61;i++){
+		
+		%>
+		
+		<option value="<%=i%>" <%=(min==i)?"selected":""%>><%=i %></option>
+		
+		<% 
+	}
+	
+	%>
+	
+	
+	</select>분
 
 </td>
 
